@@ -1,0 +1,76 @@
+import nltk
+import random
+from nltk.chat.util import Chat, reflections
+
+# Sample responses for the chatbot
+pairs = [
+    [
+        r"my name is (.*)",
+        ["Hello %1, How are you today ?",]
+    ],
+    [
+        r"hi|hey|hello",
+        ["Hello", "Hey there",]
+    ],
+    [
+        r"what is your name ?",
+        ["I am a chatbot created to assist you.",]
+    ],
+    [
+        r"how are you ?",
+        ["I'm doing good\nHow about You ?",]
+    ],
+    [
+        r"how can you assist me?",
+        [
+            "I can assist you in telling details related to python program like defination,features,applications",
+        "I can also tell you a joke!!"]
+    ],
+    [
+        r"tell me a joke | tell a joke|joke",
+        ["Why don't scientists trust atoms? Because they make up everything!"]
+    ],
+    [
+        r"Nice joke!!!|nice joke",
+        ["Thank you for feedback ^u^"]
+    ],
+    [
+        r"I am fine",
+        ["Great to hear that, how can I help you?",]
+    ],
+    [
+        r"quit",
+        ["Bye, take care. See you soon :) ","It was nice talking to you. See you soon :)"]
+    ],
+    [
+        r"What is python programming language|what is python programming|what is python",
+        ["Python is a high-level, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation."]
+    ]
+]
+
+# Default responses for unrecognized inputs
+default_responses = [
+    "I didn't understand that. Can you rephrase?",
+    "I'm not sure how to respond to that.",
+    "Can you please elaborate?"
+]
+
+# Create a chatbot instance
+chatbot = Chat(pairs, reflections)
+
+def start_chat():
+    print("Hi, I'm the chatbot. Let's talk! (type 'quit' to exit)")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == 'quit':
+            print("Chatbot: Bye, take care!")
+            break
+        response = chatbot.respond(user_input)
+        if response:
+            print("Chatbot:", response)
+        else:
+            print("Chatbot:", random.choice(default_responses))
+
+# Start the chat
+start_chat()
+
